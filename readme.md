@@ -1,5 +1,8 @@
 ## Football API
 
+### Source
+- `E0,Arsenal,Chelsea,1,0,H` (League,Home Team,Away Team,Home Score,Away Score,Winner)
+
 ### Models
 #### League 
 
@@ -7,8 +10,8 @@
   - has many Teams
 
 2. Fields:
-  - code
-  - name
+  - code - E0
+  - name - English Premier League
    
 3. Queries:
   - get all leagues /leagues GET
@@ -22,12 +25,12 @@
   - belongs to League
 
 2. Fields:
-  - name
-  - attack_home_params
-  - defence_home_params
-  - attack_away_params
-  - defence_away_params 
-  - home_advantage
+  - name - Arsenal
+  - attack_home_params - 120 (calculated by a job)
+  - defence_home_params - 120 (calculated by a job)
+  - attack_away_params - 120 (calculated by a job)
+  - defence_away_params - 120 (calculated by a job) 
+  - home_advantage - 120 (calculated by a job)
   
 3. Queries:
   - get all teams /teams GET ??
@@ -41,18 +44,14 @@
   - has many Scores
 
 2. Fields:
-
+  - league_id - 1
+  - home_team_id - 1
+  - away_team_id - 0
+  - home_score - 1
+  - away_score - 0
+  - winner - H (H,A,D)
 3. Queries:
   - get all matches for a league
   - get all matches for a team
 
-#### Score
-
-1. Relations:
-  - belongs to Match
-
-2. Fields:
-
-3. Queries:
-  - get score for a match
 
