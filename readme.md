@@ -15,13 +15,14 @@
   - name - English Premier League
    
 3. Queries:
-  - get all leagues /leagues GET
-  - get a league /leagues/1 GET
-  - create a league /leagues POST
-  - update a league /leagues/1 PUT
-  - delete a league /leagues/1 DELETE
-  - get all teams for a league /leagues/1/teams
-  - get a team for a league /leagues/1/teams/1
+  - get all leagues `/leagues` GET
+  - get a league `/leagues/1` GET
+  - create a league `/leagues` POST
+  - update a league `/leagues/1` PUT
+  - delete a league `/leagues/1` DELETE
+  - get all teams for a league `/leagues/1/teams`
+  - get a team for a league `/leagues/1/teams/1`
+  - get all matches for a team in a league `/leagues/1/teams/1/matches`
 
 #### Team 
 1. Relations:
@@ -37,11 +38,12 @@
   - home_advantage - 120 (calculated by a job)
   
 3. Queries:
-  - get all teams /teams GET
-  - get a team /teams/1 GET
-  - create a league /teams POST
-  - update a league /teams/1 PUT
-  - delete a league /teams/1 DELETE
+  - get all teams `/teams` GET
+  - get a team `/teams/1` GET
+  - create a league `/teams` POST
+  - update a league `/teams/1` PUT
+  - delete a league `/teams/1` DELETE
+  - get all matches for a team `/teams/1/matches`
 
 #### Match 
 
@@ -58,7 +60,9 @@
   - away_score - 0
   - winner - H (H,A,D)
 3. Queries:
-  - get all matches for a league
-  - get all matches for a team
+  - get all matches `/matches` GET
+  - create a matche `/matches` POST
+  - update a matche `/matches/1` PUT
+  - delete a matche `/matches/1` DELETE
 
 
