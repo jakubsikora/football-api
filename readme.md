@@ -8,6 +8,7 @@
 
 1. Relations:
   - has many Teams
+  - belongs to many Matches
 
 2. Fields:
   - code - E0
@@ -19,10 +20,13 @@
   - create a league /leagues POST
   - update a league /leagues/1 PUT
   - delete a league /leagues/1 DELETE
+  - get all teams for a league /leagues/1/teams
+  - get a team for a league /leagues/1/teams/1
 
 #### Team 
 1. Relations:
-  - belongs to League
+  - belongs to many Leagues
+  - belongs to many Matches
 
 2. Fields:
   - name - Arsenal
@@ -33,16 +37,19 @@
   - home_advantage - 120 (calculated by a job)
   
 3. Queries:
-  - get all teams /teams GET ??
-  - get a team /teams/1 GET ??
-  - get all teams for a league /leagues/1/teams GET
-  - get a team for a league /leagues/1/teams/1 GET
+  - get all teams /teams GET
+  - get a team /teams/1 GET
+  - create a league /teams POST
+  - update a league /teams/1 PUT
+  - delete a league /teams/1 DELETE
 
 #### Match 
 
 1. Relations:
-  - has many Scores
-
+  - has many home teams
+  - has many away teams
+  - has many leagues
+  
 2. Fields:
   - league_id - 1
   - home_team_id - 1
