@@ -26,8 +26,7 @@ class StoreLeagueRequest extends Request
     public function rules()
     {
         return [
-            'code' => 'required|unique:leagues',
-            'name' => 'required',
+            'name' => 'required|unique:leagues',
         ];
     }
 

@@ -26,7 +26,7 @@ class UpdateLeagueRequest extends Request
     public function rules()
     {
         return [
-            'code' => 'unique:leagues',
+            'name' => 'unique:leagues',
         ];
     }
 

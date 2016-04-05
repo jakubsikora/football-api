@@ -19,28 +19,24 @@ class LeaguesController extends Controller
     use ApiResponse;
 
     /**
-     * @var \Transformers\LeagueTransformer
-     */
-    protected $leagueTransformer;
-
-    public function __construct(LeagueTransformer $leagueTransformer)
-    {
-        $this->leagueTransformer = $leagueTransformer;
-    }
-
-    /**
      * [index description]
      * @return [type] [description]
      */
     public function index()
     {
         $limit = Input::get('limit') ?: null;
-        $leagues = League::paginate($limit);
+        $season = Input::get('season') ?: null;
 
-        return $this->respondWithPagination($leagues,
-            $this->leagueTransformer
-                 ->transformCollection($leagues->all())
-        );
+        // Return all seasons
+        if (!$season) {
+            $leagues = League::paginate($limit);
+        } else {
+            $seasons = explode(',', $season);
+            $leagues = League::season($seasons)->paginate();
+        }
+
+        // TODO: transform response
+        return $this->respondWithPagination($leagues);
     }
 
     /**
@@ -50,16 +46,14 @@ class LeaguesController extends Controller
      */
     public function show($id)
     {
-        $league = League::find($id);
+        // TODO: transform response
+        $league = League::with('seasons')->find($id);
 
         if (! $league) {
             return $this->respondNotFound('League does not exist');
         }
 
-        return $this->respond(
-            $this->leagueTransformer
-                 ->transform($league)
-        );
+        return $this->respond($league->toArray());
     }
 
     /**

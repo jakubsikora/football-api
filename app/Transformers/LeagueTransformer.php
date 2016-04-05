@@ -14,7 +14,6 @@ class LeagueTransformer extends Transformer {
     {
         return [
             'id' => $league['id'],
-            'code' => $league['code'],
             'name' => $league['name'],
         ];
     }

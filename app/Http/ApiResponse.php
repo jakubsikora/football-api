@@ -101,9 +101,9 @@ trait ApiResponse
      * @param  [type]    $data       [description]
      * @return [type]                [description]
      */
-    public function respondWithPagination(Paginator $collection, $data)
+    public function respondWithPagination(Paginator $collection)
     {
-        return $this->respond($data, [
+        return $this->respond($collection->toArray()['data'], [
             'X-Total-Count' => $collection->total(),
             'Link' => $this->buildHeaderLinks($collection)
         ]);

@@ -2,17 +2,16 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Season;
 use App\League;
-use App\Team;
-use App\Result;
 
 class DatabaseSeeder extends Seeder
 {
     private $tables = [
         'users',
+        'seasons',
         'leagues',
-        'teams',
-        'results',
+        'league_season',
     ];
 
     /**
@@ -25,9 +24,24 @@ class DatabaseSeeder extends Seeder
         $this->cleanDatabase();
 
         factory(User::class, 50)->create();
-        factory(League::class, 5)->create();
-        factory(Team::class, 20)->create();
-        factory(Result::class, 60)->create();
+        factory(Season::class, 10)->create();
+        factory(League::class, 2)->create();
+
+        $seasons = App\Season::lists('id');
+
+        for ($i = 1; $i <= 10; $i++) {
+            DB::table('league_season')->insert([
+                'league_id' => 1,
+                'season_id' => $i
+            ]);
+        }
+
+        for ($i = 1; $i <= 2; $i++) {
+            DB::table('league_season')->insert([
+                'league_id' => 2,
+                'season_id' => $i
+            ]);
+        }
     }
 
     /**
@@ -42,6 +56,6 @@ class DatabaseSeeder extends Seeder
             DB::table($tableName)->truncate();
         }
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
