@@ -1,7 +1,7 @@
 ## Football API
 
 ### Source
-- `E0,Arsenal,Chelsea,1,0,H` (League,Home Team,Away Team,Home Score,Away Score,Winner)
+- `E0,Arsenal,Chelsea,1,0,H` (League, Home Team,Away Team,Home Score,Away Score,Winner)
 
 ### Models
 #### League 
