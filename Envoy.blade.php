@@ -5,8 +5,6 @@
     cd /var/www/football-api
     {{-- Set app to maintenance mode --}}
     {{-- php artisan down -}}
-    {{-- Update composer to latest version --}}
-    composer self-update
     {{-- Pull latest changes from Repository --}}
     git pull origin master
     {{-- Install project dependencies without development dependencies and without interaction --}}
