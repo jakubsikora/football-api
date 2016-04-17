@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\User;
 use App\Season;
 use App\League;
+use App\Team;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,6 +13,7 @@ class DatabaseSeeder extends Seeder
         'seasons',
         'leagues',
         'league_season',
+        'teams',
     ];
 
     /**
@@ -26,6 +28,7 @@ class DatabaseSeeder extends Seeder
         factory(User::class, 50)->create();
         factory(Season::class, 10)->create();
         factory(League::class, 2)->create();
+        factory(Team::class, 20)->create();
 
         $seasons = App\Season::lists('id');
 

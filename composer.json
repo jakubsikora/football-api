@@ -7,7 +7,9 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "tymon/jwt-auth": "0.5.*"
+        "tymon/jwt-auth": "0.5.*",
+        "league/csv": "^8.0",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",

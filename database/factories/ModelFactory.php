@@ -34,5 +34,12 @@ $factory->define(App\Season::class, function (Faker\Generator $faker) {
 $factory->define(App\League::class, function (Faker\Generator $faker) {
     return [
         'name' => 'League ' . $faker->randomLetter(),
+        'code' => strtoupper($faker->randomLetter()) . $faker->randomDigit(),
+    ];
+});
+
+$factory->define(App\Team::class, function (Faker\Generator $faker) {
+    return [
+        'name' => 'Team ' . $faker->randomLetter()
     ];
 });

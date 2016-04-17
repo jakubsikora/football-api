@@ -10,6 +10,6 @@ class Season extends Model
 
     public function leagues()
     {
-        return $this->belongsToMany('League', 'league_season', 'season_id', 'league_id');
+        return $this->belongsToMany('App\League', 'league_season', 'season_id', 'league_id');
     }
 }

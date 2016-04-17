@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLeagueSeasonTable extends Migration
+class CreateTeamsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class CreateLeagueSeasonTable extends Migration
      */
     public function up()
     {
-        Schema::create('league_season', function (Blueprint $table) {
+        Schema::create('teams', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('league_id');
-            $table->integer('season_id');
+            $table->string('name');
+
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +28,6 @@ class CreateLeagueSeasonTable extends Migration
      */
     public function down()
     {
-        Schema::drop('league_season');
+        Schema::drop('teams');
     }
 }
