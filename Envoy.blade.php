@@ -8,7 +8,7 @@
     {{-- Pull latest changes from Repository --}}
     git pull origin master
     {{-- Install project dependencies without development dependencies and without interaction --}}
-    composer install --prefer-source --no-interaction --no-dev
+    composer install --prefer-source --no-interaction
     {{-- If there is anything to migrate, migrate it --}}
     {{-- php artisan migrate --}}
     {{-- Disable maintenance mode --}}
