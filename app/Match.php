@@ -29,4 +29,11 @@ class Match extends Model
     {
         return $this->hasOne('App\League', 'id', 'league_id');
     }
+
+    public function scopeLeagueCode($query, $leagueCodes)
+    {
+        return $query->whereHas('league', function($q) use ($leagueCodes) {
+            $q->whereIn('code', explode(",", $leagueCodes));
+        });
+    }
 }

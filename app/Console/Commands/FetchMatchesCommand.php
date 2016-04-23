@@ -44,6 +44,10 @@ class FetchMatchesCommand extends Command
 
     private $processedMatches = [];
 
+    private $fixTeamsMap = array(
+        'Middlesboro' => 'Middlesbrough'
+    );
+
     /**
      * Create a new command instance.
      *
@@ -83,7 +87,7 @@ class FetchMatchesCommand extends Command
             }
 
             // Send notification to admin
-            $this->sendNotification();
+            // $this->sendNotification();
         }
     }
 
@@ -158,9 +162,25 @@ class FetchMatchesCommand extends Command
     private function processMatches(array $matches)
     {
         foreach($matches as $match) {
-            $homeTeam = $this->processTeam($match['home_team']);
-            $awayTeam = $this->processTeam($match['away_team']);
-            $this->processMatch($match, $homeTeam, $awayTeam);
+            if (strlen($match['home_team']) > 0
+                && strlen($match['away_team']) > 0) {
+
+                if (array_key_exists($match['home_team'], $this->fixTeamsMap)) {
+                    $homeName = $this->fixTeamsMap[$match['home_team']];
+                } else {
+                    $homeName = $match['home_team'];
+                }
+
+                if (array_key_exists($match['away_team'], $this->fixTeamsMap)) {
+                    $awayName = $this->fixTeamsMap[$match['away_team']];
+                } else {
+                    $awayName = $match['away_team'];
+                }
+
+                $homeTeam = $this->processTeam($homeName);
+                $awayTeam = $this->processTeam($awayName);
+                $this->processMatch($match, $homeTeam, $awayTeam);
+            }
         }
     }
 
@@ -197,9 +217,10 @@ class FetchMatchesCommand extends Command
     private function sendNotification()
     {
         $numberOfMatches = count($this->processedMatches);
-        $body = "
-        <p>Processed {$numberOfMatches} matches for league: {$this->league->name} ({$this->league->country})</p>
 
+        $subject = "Processed {$numberOfMatches} matches for: {$this->league->name} ({$this->league->country}) ({$this->season->name})";
+
+        $body = "
         <ul>
         ";
 
@@ -214,10 +235,10 @@ class FetchMatchesCommand extends Command
         </ul>";
 
         // dd($body);
-        Mail::send(['html' => 'emails.fetchSummary'], ['body' => $body], function($message)
+        Mail::send(['html' => 'emails.fetchSummary'], ['body' => $body], function($message) use ($subject)
         {
             $message->to('jakub.sikora.en@gmail.com');
-            $message->subject($this->league->name);
+            $message->subject($subject);
         });
     }
 }
