@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Match;
+use App\MatchFilters;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\ApiResponse;
@@ -12,18 +13,15 @@ class MatchesController extends Controller
 {
     use ApiResponse;
 
-    public function index()
+    public function index(MatchFilters $filters)
     {
         $limit = Input::get('limit') ?: null;
-        $leagueCode = Input::get('leagueCode') ?: null;
 
-        // Return all matches
-        $matches = Match::leagueCode($leagueCode)->paginate();
-
-        // $leagues = Match::paginate($limit);
+        // Filter matches
+        $matches = Match::filter($filters)->paginate($limit);
 
         // TODO: transform response
-        return $this->respond($matches);
+        return $this->respondWithPagination($matches);
     }
 
     public function show($id)

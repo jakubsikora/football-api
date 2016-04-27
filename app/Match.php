@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\QueryFilter;
 use Illuminate\Database\Eloquent\Model;
 
 class Match extends Model
@@ -35,5 +36,10 @@ class Match extends Model
         return $query->whereHas('league', function($q) use ($leagueCodes) {
             $q->whereIn('code', explode(",", $leagueCodes));
         });
+    }
+
+    public function scopeFilter($query, QueryFilter $filters)
+    {
+        return $filters->apply($query);
     }
 }
